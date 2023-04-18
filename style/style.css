@@ -1,0 +1,62 @@
+.red-background {
+    background-color: #DA0000 !important;
+}
+
+.foto-cardapio {
+    width: 30%;
+    height: 30%;
+    background-image: url("https://www.italianissimo.com.br/wp-content/uploads/2019/08/italianissimo-cardapio.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#cardapio li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+#cardapio li img {
+    margin-right: 1rem;
+}
+
+#cardapio li .info {
+    flex: 1;
+}
+
+#cardapio li div:last-child {
+    display: flex;
+    align-items: center;
+}
+
+#cardapio li div:last-child button {
+    margin: 0 0.5rem;
+}
+
+#rodape {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #DA0000;
+    color: white;
+    padding: 0.5rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  #rodape .total {
+    flex: 1;
+  }
+  
+  #btn-confirmar {
+    background-color: white;
+    color: red;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
