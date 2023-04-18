@@ -60,3 +60,60 @@
     font-size: 1rem;
     cursor: pointer;
   }
+
+  .card {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+  .card .info {
+    flex: 1;
+  }
+  
+  .card .info h2 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .card .info p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .card div:last-child {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+  }
+  
+  .card span {
+    display: inline-block;
+    padding: 0 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .btn-round {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 10%;
+    background-color: #eee;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn-round:hover {
+    background-color: #ddd;
+  }
