@@ -6,10 +6,13 @@ $(document).ready(function () {
   hamburger = new Item("Hamburger", 15.00, "../assets/hamburger.jpg");
   pizza = new Item("Pizza", 20.00, "/assets/pizza.jpg");
   itens = [batataFrita, refrigerante, hamburger, pizza];
+  usuario = 6213901;
   var lista = $("#cardapio");
 
   jsonItens = transformarEmJson(itens);
+  jsonUsuario = transformarEmJson(usuario);
   salvarEmLocalStorage(jsonItens, "itensTabela");
+  salvarEmLocalStorage(jsonUsuario, "usuarioTabela")
 
   for (var i = 0; i < itens.length; i++) {
     var item = itens[i];
@@ -68,7 +71,7 @@ $(document).ready(function () {
     li.find("span").text(qtd);
     $("#valor-total").text(valorTotal.toFixed(2));
     itens[li.index()].quantidade = qtd; // atualiza a quantidade no array de itens
-    salvarEmLocalStorage(transformarEmJson(itens), "itensTabela"); // atualiza o localStorage
+    salvarItens(itens, usuario, valorTotal, 1); // atualiza o localStorage (armazenamento.js
   });
 
   $("#btn-confirmar").on("click", function () {
@@ -85,7 +88,9 @@ $(document).ready(function () {
       }
     });
     if (pedidos.length > 0) { // verifica se existem pedidos para realizar a ação
-      alert("Pedidos: " + JSON.stringify(pedidos) + "\nTotal: R$ " + valorTotal.toFixed(2));
+      salvarEmLocalStorage(jsonUsuario, "logado");
+      salvarItens(itens, usuario, valorTotal, 2); // atualiza o localStorage (armazenamento.js)
+      window.location.href = "pagamento.html";
     } else {
       alert("Selecione ao menos um item!");
     }

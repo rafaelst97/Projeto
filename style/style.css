@@ -117,3 +117,12 @@
   .btn-round:hover {
     background-color: #ddd;
   }
+
+  .btn-verde {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }

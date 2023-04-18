@@ -5,11 +5,11 @@ function transformarEmJson(objeto){
 }
 
 function salvarEmLocalStorage(json, tabela){
-    localStorage.setItem("itensTabela", json);
+    localStorage.setItem(tabela, json);
 }
 
-function buscarDeLocalStorage(){
-    let retorno = localStorage.getItem("itensTabela");
+function buscarDeLocalStorage(tabela){
+    let retorno = localStorage.getItem(tabela);
 
     return retorno;
 }
