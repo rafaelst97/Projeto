@@ -10,8 +10,7 @@ $( document ).ready(function() {
         db.transaction(function(tx) {
           // Criar tabela de usuários
           tx.executeSql(
-            "CREATE TABLE IF NOT EXISTS Usuarios (id INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "nome TEXT," +
+            "CREATE TABLE IF NOT EXISTS Usuarios (nome TEXT," +
             "senha TEXT," +
             "email TEXT," +
             "telefone TEXT," +
@@ -29,14 +28,24 @@ $( document ).ready(function() {
           );
             //Criar tabela de cargos
           tx.executeSql(
-            "CREATE TABLE IF NOT EXISTS Cargos (id INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "nome TEXT)",
+            "CREATE TABLE IF NOT EXISTS Cargos (nome TEXT)",
             [],
             function() {
               console.log("Tabela Cargos inicializada com sucesso!");
             },
             function(error) {
               console.log("Erro ao criar tabela: Cargos", error);
+            }
+          );
+          //Popula Tabela de cargos
+          tx.executeSql(
+            "INSERT INTO Cargos (nome) VALUES ('Atendente'), ('Cozinheiro'), ('Entregador')",
+            [],
+            function() {
+              console.log("Cargos inseridos com sucesso!");
+            },
+            function(error) {
+              console.log("Erro ao inserir cargos", error);
             }
           );
         });
