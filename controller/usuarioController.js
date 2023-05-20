@@ -8,6 +8,7 @@ $(document).ready(function() {
       let rg = $('#Rg').val();
 
       let novoUsuario = new Usuario(nome, senha, email, telefone, cpf, rg);
+      console.log(novoUsuario);
       novoUsuario.salvar();
     });
   });
