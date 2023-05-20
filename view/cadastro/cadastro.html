@@ -48,38 +48,67 @@
   </header>
 
   <main>
-    <div class="container d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
-      <h1>iLarica<img src="../../assets/logo.png" alt="Logo"></h1>
-      <div class="input-group flex-nowrap d-flex justify-content-center mt-3">
+    <div class="container d-flex flex-column justify-content-center" style="height: 100vh;">
+      <div class="row d-flex justify-content-center">
+        <div class="col-12" align="center">
+          <h1>iLarica<img class="" src="../../assets/logo.png" alt="Logo"></h1>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="input-group col-12 mt-3">
         <span class="input-group-text" id="addon-wrapping">Nome</span>
-        <input type="email" class="form-control input-padrao" id="Nome" placeholder="Nome" aria-label="Nome"
-          aria-describedby="addon-wrapping">
+        <input type="email" class="form-control" id="Nome" placeholder="Nome" aria-label="Nome"
+        aria-describedby="addon-wrapping" required>
+        <div class="invalid-feedback">Insira um nome</div>
+        </div>
       </div>
-      <div class="input-group flex-nowrap d-flex justify-content-center mt-3">
-        <span class="input-group-text" id="addon-wrapping">Senha</span>
-        <input type="password" class="form-control input-padrao"  id="Senha" placeholder="senha" aria-label="senha"
-          aria-describedby="addon-wrapping">
+
+      <div class="row">
+        <div class="input-group col-12 mt-3">
+          <span class="input-group-text" id="addon-wrapping">Senha</span>
+          <input type="password" class="form-control input-padrao"  id="Senha" placeholder="senha" aria-label="senha"
+            aria-describedby="addon-wrapping" required>
+            <div class="invalid-feedback">Insira uma senha</div>
+        </div>
       </div>
-      <div class="input-group flex-nowrap d-flex justify-content-center mt-3">
-        <span class="input-group-text" id="addon-wrapping">E-mail</span>
-        <input type="email" class="form-control input-padrao"  id="Email" placeholder="email" aria-label="email"
-          aria-describedby="addon-wrapping">
+
+      <div class="row">
+        <div class="input-group col-12 mt-3">
+          <span class="input-group-text" id="addon-wrapping">E-mail</span>
+          <input type="email" class="form-control input-padrao"  id="Email" placeholder="email" aria-label="email"
+            aria-describedby="addon-wrapping" required>
+            <div class="invalid-feedback">Insira um email</div>
+        </div>
       </div>
-      <div class="input-group flex-nowrap d-flex justify-content-center mt-3">
-        <span class="input-group-text" id="addon-wrapping">Cpf</span>
-        <input type="text" class="form-control input-padrao"  id="Cpf" placeholder="cpf" aria-label="cpf"
-          aria-describedby="addon-wrapping">
+
+      <div class="row">
+        <div class="input-group col-12 mt-3">
+          <span class="input-group-text" id="addon-wrapping">Cpf</span>
+          <input type="text" class="form-control input-padrao"  id="Cpf" placeholder="cpf" aria-label="cpf"
+            aria-describedby="addon-wrapping" required>
+            <div class="invalid-feedback">Insira um CPF</div>
+        </div>
       </div>
-      <div class="input-group flex-nowrap d-flex justify-content-center mt-3">
-        <span class="input-group-text" id="addon-wrapping">RG</span>
-        <input type="text" class="form-control input-padrao"  id="Rg" placeholder="rg" aria-label="rg"
-          aria-describedby="addon-wrapping">
+
+      <div class="row">
+        <div class="input-group col-12 mt-3">
+          <span class="input-group-text" id="addon-wrapping">RG</span>
+          <input type="text" class="form-control input-padrao"  id="Rg" placeholder="rg" aria-label="rg"
+            aria-describedby="addon-wrapping" required>
+            <div class="invalid-feedback">Insira um RG</div>
+        </div>
       </div>
-      <div class="input-group flex-nowrap d-flex justify-content-center mt-3">
-        <span class="input-group-text" id="addon-wrapping">Telefone</span>
-        <input type="phone" class="form-control input-padrao"  id="Telefone" placeholder="telefone" aria-label="telefone"
-          aria-describedby="addon-wrapping">
+
+      <div class="row">
+        <div class="input-group col-12 mt-3">
+          <span class="input-group-text" id="addon-wrapping">Telefone</span>
+          <input type="phone" class="form-control input-padrao"  id="Telefone" placeholder="telefone" aria-label="telefone"
+            aria-describedby="addon-wrapping" required>
+            <div class="invalid-feedback">Insira um telefone</div>
+        </div>
       </div>
+
       <div class="container">
         <div class="d-flex justify-content-around">
             <button type="button" class="mt-5 btn btn-primary btn-lg"><</button>
