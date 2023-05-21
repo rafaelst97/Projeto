@@ -15,6 +15,8 @@
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
   </script>
   <script src="../js/init/initDB.js"></script>
+  <script src="../model/usuarioModel.js"></script>
+  <script src="../controller/usuarioController.js"></script>
 </head>
 
 <body>
@@ -27,22 +29,54 @@
   </header>
 
   <main>
-    <div class="container d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
-      <h1>iLarica<img src="../assets/logo.png" alt="[Logo]"></h1>
-      <div class="input-group flex-nowrap d-flex justify-content-center">
-        <span class="input-group-text" id="addon-wrapping">Usuário</span>
-        <input type="email" class="form-control input-padrao" placeholder="usuário" aria-label="usuário"
-          aria-describedby="addon-wrapping">
+    <div class="container d-flex flex-column justify-content-center" style="height: 100vh;">
+      <div class="row d-flex justify-content-center">
+        <div class="col-12" align="center">
+          <h1>iLarica<img class="" src="../../assets/logo.png" alt="Logo"></h1>
+        </div>
       </div>
-      <div class="input-group flex-nowrap d-flex justify-content-center mt-2">
-        <span class="input-group-text" id="addon-wrapping">Senha</span>
-        <input type="password" class="form-control input-padrao" placeholder="senha" aria-label="senha"
-          aria-describedby="addon-wrapping">
+
+      <div class="row">
+        <div class="input-group col-12 mt-3">
+          <span class="input-group-text" id="addon-wrapping">Usuário</span>
+          <input type="email" class="form-control" id='LoginUsuario' placeholder="usuário"
+            aria-label="usuário" aria-describedby="addon-wrapping">
+          <div class="invalid-feedback">Insira um usuário válido</div>
+        </div>
       </div>
-      <button type="button" class="mt-5 btn btn-primary btn-lg">Login</button>
-      <a href="#">Esqueci minha senha</a>
-      <p>Se não tiver conta</p><br>
-      <a href="../view/cadastro/cadastro.html"><strong>Cadastre-se</strong></a>
+
+      <div class="row">
+        <div class="input-group col-12 mt-3">
+          <span class="input-group-text" id="addon-wrapping">Senha</span>
+          <input type="password" class="form-control" id='LoginSenha' placeholder="senha"
+            aria-label="senha" aria-describedby="addon-wrapping">
+          <div class="invalid-feedback">Insira uma senha válida</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="container" align="center">
+          <button type="button" class="mt-5 btn btn-primary btn-lg" id="BtnLogin">Login</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="container" align="center">
+          <a href="#">Esqueci minha senha</a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="container" align="center">
+          <p>Se não tiver conta</p><br>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="container" align="center">
+          <a href="../view/cadastro/cadastro.html"><strong>Cadastre-se</strong></a>
+        </div>
+      </div>
     </div>
   </main>
 

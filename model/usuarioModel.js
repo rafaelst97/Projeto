@@ -21,12 +21,34 @@ function Usuario(nome, senha, email, telefone, cpf, rg) {
     db.transaction(function (tx) {
       tx.executeSql(
         'INSERT INTO Usuarios (nome, senha, email, telefone, cpf, rg, matricula, cargo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-        [self.nome, self.senha, self.email, self.telefone, self.cpf, self.rg, null, null],
+        [self.nome, self.senha, self.email, self.telefone, self.cpf, self.rg, 0, 0],
         function (tx, result) {
           console.log('Inserção realizada com sucesso em usuários! ID do registro: ' + result.insertId);
         },
         function (tx, error) {
           console.log('Erro ao realizar a inserção em usuários: ' + error.message);
+        }
+      );
+    });
+  }
+
+  //Faz Login
+  this.login = function (email, senha) {
+    db.transaction(function (tx) {
+      tx.executeSql(
+        'SELECT * FROM Usuarios WHERE email = ? AND senha = ?',
+        [email, senha],
+        function (tx, result) {
+          console.log(result.rows.length);
+          if (result.rows.length > 0) {
+            console.log('Login realizado com sucesso!');
+            window.location.href = "../../view/cardapio/cardapio.html";
+          } else {
+            console.log('Email ou senha incorretos!');
+          }
+        },
+        function (tx, error) {
+          console.log('Erro ao realizar o login: ' + error.message);
         }
       );
     });

@@ -94,6 +94,41 @@ $(document).ready(function () {
     };
 
   };
+
+  $('#BtnLogin').click(function () {
+    let email = $('#LoginUsuario').val();
+    let senha = $('#LoginSenha').val();
+
+    let regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let emailValido = false;
+    let senhaValida = false;
+
+    //Verifica se o email foi preenchido e se é válido
+    if (regexEmail.test(email) == false || email == "" || email == null || typeof email == 'undefined') {
+      $('#LoginUsuario').addClass('is-invalid');
+      emailValido = false;
+    }
+    else {
+      $('#LoginUsuario').removeClass('is-invalid');
+      emailValido = true;
+    }
+
+    //Verifica se a senha foi preenchida e se possui no mínimo 8 caracteres
+    if (senha == "" || senha == null || typeof senha == 'undefined' || senha.length < 8) {
+      $('#LoginSenha').addClass('is-invalid');
+      senhaValida = false;
+    }
+    else {
+      $('#LoginSenha').removeClass('is-invalid');
+      senhaValida = true;
+    }
+
+    if (emailValido && senhaValida) {
+      let usuario = new Usuario();
+      usuario.login(email, senha);
+    }
+
+  });
 });
 
 /*id: PK int
