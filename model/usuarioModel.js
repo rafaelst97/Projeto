@@ -42,6 +42,11 @@ function Usuario(nome, senha, email, telefone, cpf, rg) {
           console.log(result.rows.length);
           if (result.rows.length > 0) {
             console.log('Login realizado com sucesso!');
+            db.transaction(function (tx) {
+              tx.executeSql('SELECT rowid FROM Usuarios WHERE email = ?', [email], function (tx, result) {
+                setCookie('idUsuario', result.rows.item(0).rowid, 1);
+              });
+            });
             window.location.href = "../../view/pedido/pedido.html";
           } else {
             console.log('Email ou senha incorretos!');

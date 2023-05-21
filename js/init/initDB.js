@@ -106,35 +106,14 @@ $(document).ready(function () {
         });
       });
 
-
-      //Criar tabela de pedidos
-      db.transaction(function (tx) {
-        tx.executeSql(
-          "CREATE TABLE IF NOT EXISTS Pedidos (idUsuario INTEGER," +
-          "idItem INTEGER," +
-          "quantidade INTEGER," +
-          "status TEXT," +
-          "FOREIGN KEY(idUsuario) REFERENCES Usuarios(id)," +
-          "FOREIGN KEY(idItem) REFERENCES Cardapio(id))",
-          [],
-          function () {
-            console.log("Tabela Pedidos inicializada com sucesso!");
-          },
-          function (error) {
-            console.log("Erro ao criar tabela: Pedidos", error);
-          }
-        );
-      });
-
       //Criar tabela de itens do pedido
       db.transaction(function (tx) {
         tx.executeSql(
-          "CREATE TABLE IF NOT EXISTS ItensPedido (id INTEGER PRIMARY KEY AUTOINCREMENT," +
-          "idPedido INTEGER," +
+          "CREATE TABLE IF NOT EXISTS ItensPedido (idPedido INTEGER," +
           "idItem INTEGER," +
           "quantidade INTEGER," +
-          "FOREIGN KEY(idPedido) REFERENCES Pedidos(id)," +
-          "FOREIGN KEY(idItem) REFERENCES Cardapio(id))",
+          "FOREIGN KEY(idPedido) REFERENCES Pedidos(rowid)," +
+          "FOREIGN KEY(idItem) REFERENCES ItensCardapio(rowid))",
           [],
           function () {
             console.log("Tabela ItensPedido inicializada com sucesso!");
@@ -145,6 +124,58 @@ $(document).ready(function () {
         );
       });
 
+      //Criar tabela de status
+      db.transaction(function (tx) {
+        tx.executeSql(
+          "CREATE TABLE IF NOT EXISTS Status (nome TEXT)",
+          [],
+          function () {
+            console.log("Tabela Status inicializada com sucesso!");
+          },
+          function (error) {
+            console.log("Erro ao criar tabela: Status", error);
+          }
+        );
+      });
+
+      //Inserir status caso ainda não tenham sido populados
+      db.transaction(function (tx) {
+        tx.executeSql('SELECT COUNT(*) FROM Status', [], function (tx, result) {
+          countStatus = result.rows.item(0)['COUNT(*)'];
+
+          if (countStatus == 0) {
+            tx.executeSql('INSERT INTO Status (nome) VALUES ("Aguardando Preparo"), ("Em preparo"), ("Aguardando Entrega"), ("Em entrega"), ("Concluído"), ("Aguardando Retirada"), ("Cancelado")',
+              [],
+              function () {
+                console.log("Status inseridos com sucesso!");
+              },
+              function (error) {
+                console.log("Erro ao inserir status", error);
+              }
+            );
+          }
+        }, function (tx, error) {
+          console.log('Erro na consulta: ' + error.message);
+        });
+      });
+
+      //Criar tabela de pedidos
+      db.transaction(function (tx) {
+        tx.executeSql(
+          "CREATE TABLE IF NOT EXISTS Pedidos (idUsuario INTEGER," +
+          "status INTEGER," +
+          "formaPagamento TEXT," +
+          "FOREIGN KEY(idUsuario) REFERENCES Usuarios(rowid)," +
+          "FOREIGN KEY(status) REFERENCES Status(rowid))",
+          [],
+          function () {
+            console.log("Tabela Pedidos inicializada com sucesso!");
+          },
+          function (error) {
+            console.log("Erro ao criar tabela: Pedidos", error);
+          }
+        );
+      });
     });
   } else {
     console.log("Seu navegador não suporta o Web SQL");
