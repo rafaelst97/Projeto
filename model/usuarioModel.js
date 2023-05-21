@@ -42,7 +42,7 @@ function Usuario(nome, senha, email, telefone, cpf, rg) {
           console.log(result.rows.length);
           if (result.rows.length > 0) {
             console.log('Login realizado com sucesso!');
-            window.location.href = "../../view/cardapio/cardapio.html";
+            window.location.href = "../../view/pedido/pedido.html";
           } else {
             console.log('Email ou senha incorretos!');
           }
