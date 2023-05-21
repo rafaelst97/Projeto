@@ -100,7 +100,7 @@ function Pedido() {
     }
   }
 
-  this.pagarPedido = async function(idPagamento) {
+  this.pagarPedido = async function (idPagamento) {
     let idUsuario = getCookie('idUsuario');
     try {
       let idPedido = await this.pedidoPorUsuario(idUsuario);
@@ -110,7 +110,7 @@ function Pedido() {
           [idPedido],
           function (tx, result) {
             console.log('Pedido pago com sucesso!');
-            // window.location.href = 'pedidos.html';
+            window.location.href = 'rastreio.html'
           },
           function (tx, error) {
             console.log('Erro ao pagar pedido: ' + error.message);
@@ -122,7 +122,7 @@ function Pedido() {
     }
   }
 
-  this.cancelarPedido = function(idPedido) {
+  this.cancelarPedido = function (idPedido) {
     db.transaction(function (tx) {
       tx.executeSql(
         'UPDATE Pedidos SET status = 7 WHERE rowid = ?',
@@ -160,8 +160,110 @@ function Pedido() {
     });
   }
 
-}
+  this.populaStatus = function () {
+    return new Promise(function (resolve, reject) {
+      db.transaction(function (tx) {
+        tx.executeSql(
+          'SELECT * FROM Status',
+          [],
+          function (tx, result) {
+            if (result.rows.length > 0) {
+              let status = result.rows;
+              console.log(status)
+              resolve(status);
+            } else {
+              console.log('Status não encontrado!');
+              reject(new Error('Status não encontrado!'));
+            }
+          },
+          function (tx, error) {
+            console.log('Erro ao buscar status: ' + error.message);
+            reject(new Error('Erro ao buscar status: ' + error.message));
+          }
+        );
+      });
+    });
+  };
 
+  this.statusPedido = function (idPedido) {
+    return new Promise(function (resolve, reject) {
+      db.transaction(function (tx) {
+        tx.executeSql(
+          'SELECT status FROM Pedidos WHERE rowid = ?',
+          [idPedido],
+          function (tx, result) {
+            if (result.rows.length > 0) {
+              let status = result.rows[0].status;
+              resolve(status);
+            } else {
+              reject(new Error('Pedido não encontrado!'));
+            }
+          },
+          function (tx, error) {
+            reject(new Error('Erro ao buscar pedido: ' + error.message));
+          }
+        );
+      });
+    });
+  }
+
+  this.rastrear = async function () {
+
+    let idUsuario = 0;
+    let arrayStatus = [];
+    let idPedido = 0;
+    let statusPedido = 0;
+    let descricaoStatus = '';
+    let valorTotal = 0;
+    try {
+      idUsuario = getCookie('idUsuario');
+      arrayStatus = await this.populaStatus();
+      idPedido = await this.pedidoPorUsuario(idUsuario);
+      statusPedido = await this.statusPedido(idPedido);
+      descricaoStatus = arrayStatus[statusPedido - 1].nome;
+      $('#statusRastreio').text(descricaoStatus);
+
+      db.transaction(function (tx) {
+        tx.executeSql(
+          'SELECT * FROM ItensPedido WHERE idPedido = ?',
+          [idPedido],
+          function (tx, result) {
+            if (result.rows.length > 0) {
+              let itens = result.rows;
+              Array.from(itens).forEach((item, index) => {
+                tx.executeSql(
+                  'SELECT * FROM ItensCardapio WHERE rowid = ?',
+                  [index+1],
+                  function (tx, result) {
+                    if (result.rows.length > 0) {
+                      let itemCardapio = result.rows[0];
+                      valorTotal += itemCardapio.preco * item.quantidade;
+                      
+                      $('#valorTotalRastreio').text(`Valor total: R$${valorTotal.toFixed(2).replace('.',',')}`);
+                      $('#detalhesRastreio').append(`
+                      <p>(${item.quantidade}) - ${itemCardapio.nome} - R$${itemCardapio.preco.toFixed(2).replace('.',',')}</p>
+                      `);
+                    } else {
+                      console.log('Item não encontrado!');
+                    }
+                  },
+                );
+              });
+            } else {
+              console.log('Itens não encontrados!');
+            }
+          },
+          function (tx, error) {
+            console.log('Erro ao buscar itens do pedido: ' + error.message);
+          }
+        );
+      });
+      // Restante do código que utiliza o arrayStatus
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
 /*
 <div class="card mb-3" style="max-width: 540px;">
         <div class="row g-0">

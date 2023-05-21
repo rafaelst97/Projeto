@@ -1,7 +1,7 @@
 $(document).ready(function () {
-
     let pedidoModel = new Pedido();
-    new Pedido().trazerCardapio();
+    pedidoModel.trazerCardapio();
+    pedidoModel.rastrear();
 
     // Evento de clique para adicionar um item
     $(document).on('click', '.AddItem', function () {
