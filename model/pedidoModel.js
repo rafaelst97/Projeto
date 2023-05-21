@@ -85,6 +85,7 @@ function Pedido() {
                 [pedidoId, item.id, item.quantidade],
                 function (tx, result) {
                   console.log('Item cadastrado com sucesso!');
+                  window.location.href = 'pagamento.html';
                 },
                 function (tx, error) {
                   console.log('Erro ao cadastrar item: ' + error.message);
@@ -98,6 +99,67 @@ function Pedido() {
       console.log('Usuário não logado!');
     }
   }
+
+  this.pagarPedido = async function(idPagamento) {
+    let idUsuario = getCookie('idUsuario');
+    try {
+      let idPedido = await this.pedidoPorUsuario(idUsuario);
+      db.transaction(function (tx) {
+        tx.executeSql(
+          `UPDATE Pedidos SET formaPagamento = ${idPagamento} WHERE rowid = ?`,
+          [idPedido],
+          function (tx, result) {
+            console.log('Pedido pago com sucesso!');
+            // window.location.href = 'pedidos.html';
+          },
+          function (tx, error) {
+            console.log('Erro ao pagar pedido: ' + error.message);
+          }
+        );
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  this.cancelarPedido = function(idPedido) {
+    db.transaction(function (tx) {
+      tx.executeSql(
+        'UPDATE Pedidos SET status = 7 WHERE rowid = ?',
+        [idPedido],
+        function (tx, result) {
+          console.log('Pedido cancelado com sucesso!');
+          window.location.href = '../../index.html';
+        },
+        function (tx, error) {
+          console.log('Erro ao cancelar pedido: ' + error.message);
+        }
+      );
+    });
+  }
+
+  this.pedidoPorUsuario = function (idUsuario) {
+    return new Promise(function (resolve, reject) {
+      db.transaction(function (tx) {
+        tx.executeSql(
+          'SELECT rowid FROM Pedidos WHERE idUsuario = ? AND status <> 7 AND status <> 5',
+          [idUsuario],
+          function (tx, result) {
+            if (result.rows.length > 0) {
+              let pedidoId = result.rows[0].rowid;
+              resolve(pedidoId);
+            } else {
+              reject(new Error('Pedido não encontrado!'));
+            }
+          },
+          function (tx, error) {
+            reject(new Error('Erro ao buscar pedido: ' + error.message));
+          }
+        );
+      });
+    });
+  }
+
 }
 
 /*

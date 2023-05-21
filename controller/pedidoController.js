@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     let pedidoModel = new Pedido();
-    new pedidoModel.trazerCardapio();
+    new Pedido().trazerCardapio();
 
     // Evento de clique para adicionar um item
     $(document).on('click', '.AddItem', function () {
@@ -45,5 +45,19 @@ $(document).ready(function () {
             alert('Selecione pelo menos um item!');
         }
 
+    });
+
+    //Pagamentos
+    $('#BtnPix').click(function () {
+        pedidoModel.pagarPedido(1);
+    }
+    );
+
+    $('#BtnCartao').click(function () {
+        pedidoModel.pagarPedido(2);
+    });
+
+    $('#BtnCancelar').click(function () {
+        pedidoModel.cancelarPedido();
     });
 });
