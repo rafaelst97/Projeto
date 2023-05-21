@@ -16,8 +16,8 @@
     </script>
     <script src="../../js/init/initDB.js"></script>
     <script src="../../js/utilidades/cookies.js"></script>
-    <script src="../../model/pedidoModel.js"></script>
-    <script src="../../controller/pedidoController.js"></script>
+    <script src="../../model/avaliacaoModel.js"></script>
+    <script src="../../controller/avaliacaoController.js"></script>
 </head>
 
 <body>
@@ -33,15 +33,38 @@
 
     <main>
         <div class="container d-flex flex-column justify-content-center" id="telaRastreio" style="height: 100vh;">
-            <h1>O Status do seu Pedido é: 
-                <div id="statusRastreio"></div>
-            </h1>
+            <h1>Pedido Entregue!!</h1>
 
-            <h2>Informações do Pedido:</h2>
-            <p>Detalhes</p>
+            <h2>Avalie nosso atendimento:</h2>
+
+            <div class="rating">
+                <input type="radio" id="star1" name="rating" value="1" />
+                <label for="star1" title="1 estrela">
+                    <i class="bi bi-star-fill"></i>
+                </label>
+                <input type="radio" id="star2" name="rating" value="2" />
+                <label for="star2" title="2 estrelas">
+                    <i class="bi bi-star-fill"></i>
+                </label>
+                <input type="radio" id="star3" name="rating" value="3" />
+                <label for="star3" title="3 estrelas">
+                    <i class="bi bi-star-fill"></i>
+                </label>
+                <input type="radio" id="star4" name="rating" value="4" />
+                <label for="star4" title="4 estrelas">
+                    <i class="bi bi-star-fill"></i>
+                </label>
+                <input type="radio" id="star5" name="rating" value="5" />
+                <label for="star5" title="5 estrelas">
+                    <i class="bi bi-star-fill"></i>
+                </label>
+            </div>
+
             <div id="detalhesRastreio">
             </div>
-            <strong><p id="valorTotalRastreio"></p></strong>
+            <strong>
+                <p id="valorTotalRastreio"></p>
+            </strong>
         </div>
     </main>
 
@@ -49,12 +72,10 @@
         <div class="container">
             <nav class="navbar fixed-bottom navbar-light bg-light d-flex justify-content-around">
                 <a type="button" class="btn btn-primary btn-lg" href="../../index.html">
-                    <</a> <button type="button" class="btn btn-primary btn-lg" id="BtnConfirmaEntrega">Prosseguir
-                        </button>
-            </nav>
+                    <</a> <button type="button" class="btn btn-primary btn-lg" id="BtnAvaliar">Avaliar
+                        </button></nav>
         </div>
     </footer>
-
 </body>
 
 </html>

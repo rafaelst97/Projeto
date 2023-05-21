@@ -177,6 +177,23 @@ $(document).ready(function () {
         );
       });
     });
+
+    //Avaliações
+    db.transaction(function (tx) {
+      tx.executeSql(
+        "CREATE TABLE IF NOT EXISTS Avaliacoes (idUsuario INTEGER," +
+        "nota INTEGER," +
+        "dataAvaliacao DATE," +
+        "FOREIGN KEY(idUsuario) REFERENCES Usuarios(rowid))",
+        [],
+        function () {
+          console.log("Tabela Avaliacoes inicializada com sucesso!");
+        },
+        function (error) {
+          console.log("Erro ao criar tabela: Avaliacoes", error);
+        });
+    });
+
   } else {
     console.log("Seu navegador não suporta o Web SQL");
   }

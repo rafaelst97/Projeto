@@ -50,8 +50,7 @@ $(document).ready(function () {
     //Pagamentos
     $('#BtnPix').click(function () {
         pedidoModel.pagarPedido(1);
-    }
-    );
+    });
 
     $('#BtnCartao').click(function () {
         pedidoModel.pagarPedido(2);
@@ -59,5 +58,10 @@ $(document).ready(function () {
 
     $('#BtnCancelar').click(function () {
         pedidoModel.cancelarPedido();
+    });
+
+    //Confirma Entrega e vai para avaliação
+    $('#BtnConfirmaEntrega').click(function () {
+        pedidoModel.confirmaEntrega(getCookie('idUsuario'));
     });
 });
