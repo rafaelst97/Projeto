@@ -15,6 +15,8 @@ function Pedido() {
                 function (tx, result) {
                     console.log(result.rows.length);
                     if (result.rows.length > 0) {
+                            let id = 1
+                            console.log(result.rows)
                             console.log('Cardápio encontrado!');
                             Array.from(result.rows).forEach(produto => {
                                 $('#ListaCardapio').append(
@@ -25,15 +27,15 @@ function Pedido() {
                                     `<div class="container">` +
                                     `<div class="row mt-4">` +
                                     `<div class="col-4">` +
-                                    `<button type="button" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">` +
+                                    `<button type="button" class="btn btn-primary SubItem" data-id="${id}" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">` +
                                     `-` +
                                     `</button>` +
                                     `</div>` +
                                     `<div class="col-4">` +
-                                    `<p id="Quantidade">0</p>` +
+                                    `<p class="Quantidade" data-id="${id}">0</p>` +
                                     `</div>` +
                                     `<div class="col-4">` +
-                                    `<button type="button" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">` +
+                                    `<button type="button" class="btn btn-primary AddItem" data-id="${id}" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">` +
                                     `+` +
                                     `</button>` +
                                     `</div>` +
@@ -50,6 +52,7 @@ function Pedido() {
                                     `</div>` +
                                     `</div>`
                                 );
+                                id++;
                             });
                     } else {
                         console.log('Cardápio não encontrado!');
