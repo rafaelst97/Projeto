@@ -5,3 +5,8 @@
 .centraliza-vertical{
     height: 50vh !important;
 }
+
+.hr {
+    border-bottom: 1px solid black; /* define a espessura, estilo e cor da borda */
+    margin: 10px 0; /* adiciona margem para espaçamento */
+}
