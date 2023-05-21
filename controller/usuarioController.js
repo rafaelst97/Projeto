@@ -129,14 +129,28 @@ $(document).ready(function () {
     }
 
   });
-});
 
-/*id: PK int
-nome: string
-senha: string
-email: string
-telefone: string
-cpf: string
-rg: string
-matricula: int
-cargo int */
+  //Função para recuperar a senha
+  $('#BtnEsqueciSenha').click(function () {
+    let email = $('#EsqueciSenhaEmail').val();
+
+    let regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let emailValido = false;
+
+    //Verifica se o email foi preenchido e se é válido
+    if (regexEmail.test(email) == false || email == "" || email == null || typeof email == 'undefined') {
+      $('#EsqueciSenhaEmail').addClass('is-invalid');
+      emailValido = false;
+    }
+    else {
+      $('#EsqueciSenhaEmail').removeClass('is-invalid');
+      emailValido = true;
+    }
+
+    if (emailValido) {
+      let usuario = new Usuario();
+      usuario.esqueciSenha(email);
+    }
+
+  });
+});

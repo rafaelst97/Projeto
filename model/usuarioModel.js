@@ -54,13 +54,22 @@ function Usuario(nome, senha, email, telefone, cpf, rg) {
     });
   }
 
-  /*id: PK int
-  nome: string
-  senha: string
-  email: string
-  telefone: string
-  cpf: string
-  rg: string
-  matricula: int
-  cargo int*/
+  //Recuperar senha
+  this.esqueciSenha = function (email) {
+    db.transaction(function (tx) {
+      tx.executeSql(
+        'SELECT senha FROM Usuarios WHERE email = ?',
+        [email],
+        function (tx, result) {
+          if (result.rows.length > 0) {
+            alert('Sua senha é: ' + result.rows.item(0).senha);
+            window.location.href = "../index.html";
+          } else {
+            $('#EmailInvalido').text('Email não cadastrado!');
+            $('#EsqueciSenhaEmail').addClass('is-invalid');
+          }
+        }
+      );
+    });
+  }
 }
