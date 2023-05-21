@@ -39,10 +39,27 @@ function Usuario(nome, senha, email, telefone, cpf, rg) {
         'SELECT * FROM Usuarios WHERE email = ? AND senha = ?',
         [email, senha],
         function (tx, result) {
-          console.log(result.rows.length);
           if (result.rows.length > 0) {
             console.log('Login realizado com sucesso!');
-            window.location.href = "../../view/pedido/pedido.html";
+            db.transaction(function (tx) {
+              tx.executeSql('SELECT rowid FROM Usuarios WHERE email = ?', [email], function (tx, result) {
+                setCookie('idUsuario', result.rows.item(0).rowid, 1);
+              });
+            });
+
+            db.transaction(function (tx) {
+              tx.executeSql('SELECT COUNT(*) FROM Pedidos WHERE idUsuario = ? AND status <> 5 AND status <> 7',
+               [getCookie('idUsuario')], function (tx, result) {
+                if (result.rows.item(0)['COUNT(*)'] > 0) {
+                  console.log('Você possui um pedido em andamento!');
+                  window.location.href = '../../view/pedido/rastreio.html';
+                }else{
+                  window.location.href = '../../view/pedido/pedido.html';
+                }
+               }, function (tx, error) {
+                  console.log('Erro na consulta: ' + error.message);
+                });
+              });
           } else {
             console.log('Email ou senha incorretos!');
           }

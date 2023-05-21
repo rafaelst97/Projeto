@@ -1,6 +1,7 @@
 $(document).ready(function () {
-
-    new Pedido().trazerCardapio();
+    let pedidoModel = new Pedido();
+    pedidoModel.trazerCardapio();
+    pedidoModel.rastrear();
 
     // Evento de clique para adicionar um item
     $(document).on('click', '.AddItem', function () {
@@ -22,5 +23,41 @@ $(document).ready(function () {
         }
     });
 
+    //Prosseguir com o pedido
+    $('#BtnProsseguir').click(function () {
 
+        var itens = [];
+
+        $('#ListaCardapio .Quantidade').each(function () {
+            var quantidade = parseInt($(this).text());
+            if (quantidade > 0) {
+                var itemId = $(this).data('id');
+                itens.push({
+                    id: itemId,
+                    quantidade: quantidade
+                });
+            }
+        });
+
+        if (itens.length > 0) {
+            pedidoModel.prosseguirPedido(itens);
+        } else {
+            alert('Selecione pelo menos um item!');
+        }
+
+    });
+
+    //Pagamentos
+    $('#BtnPix').click(function () {
+        pedidoModel.pagarPedido(1);
+    }
+    );
+
+    $('#BtnCartao').click(function () {
+        pedidoModel.pagarPedido(2);
+    });
+
+    $('#BtnCancelar').click(function () {
+        pedidoModel.cancelarPedido();
+    });
 });
