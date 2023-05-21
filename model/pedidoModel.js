@@ -44,7 +44,7 @@ function Pedido() {
                                     `<div class="card-body">` +
                                     `<h5 class="card-title">${produto.nome}</h5>` +
                                     `<p class="card-text">${produto.descricao}</p>` +
-                                    `<p class="card-text"><small class="text-muted">R$ ${produto.preco}</small></p>` +
+                                    `<p class="card-text"><small class="text-muted"><strong>R$ ${produto.preco}  </strong><img src="../../assets/price.png" height="18vh" alt="[etiqueta]"></small></p>` +
                                     `</div>` +
                                     `</div>` +
                                     `</div>` +
