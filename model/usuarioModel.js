@@ -63,7 +63,7 @@ function Usuario(nome, senha, email, telefone, cpf, rg) {
         function (tx, result) {
           if (result.rows.length > 0) {
             alert('Sua senha é: ' + result.rows.item(0).senha);
-            window.location.href = "../index.html";
+            window.location.href = "../../index.html";
           } else {
             $('#EmailInvalido').text('Email não cadastrado!');
             $('#EsqueciSenhaEmail').addClass('is-invalid');
