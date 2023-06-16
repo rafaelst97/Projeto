@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../style/style.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
@@ -40,31 +41,33 @@
             <div class="rating">
                 <input type="radio" id="star1" name="rating" value="1" />
                 <label for="star1" title="1 estrela">
-                    <i class="bi bi-star-fill"></i>
+                    <i class="star"></i>
                 </label>
                 <input type="radio" id="star2" name="rating" value="2" />
                 <label for="star2" title="2 estrelas">
-                    <i class="bi bi-star-fill"></i>
+                    <i class="star"></i>
                 </label>
                 <input type="radio" id="star3" name="rating" value="3" />
                 <label for="star3" title="3 estrelas">
-                    <i class="bi bi-star-fill"></i>
+                    <i class="star"></i>
                 </label>
                 <input type="radio" id="star4" name="rating" value="4" />
                 <label for="star4" title="4 estrelas">
-                    <i class="bi bi-star-fill"></i>
+                    <i class="star"></i>
                 </label>
                 <input type="radio" id="star5" name="rating" value="5" />
                 <label for="star5" title="5 estrelas">
-                    <i class="bi bi-star-fill"></i>
+                    <i class="star"></i>
                 </label>
             </div>
 
-            <div id="detalhesRastreio">
+            <div class="form-group row">
+                <label for="gorjeta" class="col-form-label col-4">Gorjeta(R$):</label>
+                <div class="col-6">
+                    <input type="number" class="form-control" id="gorjeta" name="gorjeta" min="0" step="0.01">
+                </div>
             </div>
-            <strong>
-                <p id="valorTotalRastreio"></p>
-            </strong>
+
         </div>
     </main>
 
