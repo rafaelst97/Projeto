@@ -184,6 +184,7 @@ $(document).ready(function () {
         "CREATE TABLE IF NOT EXISTS Avaliacoes (idUsuario INTEGER," +
         "nota INTEGER," +
         "dataAvaliacao DATE," +
+        "gorjeta REAL," + // Adiciona a coluna de gorjeta
         "FOREIGN KEY(idUsuario) REFERENCES Usuarios(rowid))",
         [],
         function () {

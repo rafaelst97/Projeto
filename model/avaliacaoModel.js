@@ -8,13 +8,13 @@ function Avaliacao() {
 
     let idUsuario = 0;
 
-    this.avaliar = function (valorRating) {
+    this.avaliar = function (valorRating, valorGorjeta) {
         idUsuario = getCookie("idUsuario");
 
         db.transaction(function (tx) {
             tx.executeSql(
-                "INSERT INTO Avaliacoes (idUsuario, nota, dataAvaliacao) VALUES (?, ?, datetime('now'))",
-                [idUsuario, valorRating],
+                "INSERT INTO Avaliacoes (idUsuario, nota, dataAvaliacao, gorjeta) VALUES (?, ?, datetime('now'), ?)",
+                [idUsuario, valorRating, valorGorjeta],
                 function () {
                     console.log("Avaliação inserida com sucesso!");
                     window.location.href = "../../index.html";

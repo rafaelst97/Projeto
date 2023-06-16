@@ -1,4 +1,4 @@
-function Usuario(nome, senha, email, telefone, cpf, rg) {
+function Usuario(nome, senha, email, telefone, cpf, rg, matricula) {
 
   //Construtor
   this.nome = nome;
@@ -7,6 +7,7 @@ function Usuario(nome, senha, email, telefone, cpf, rg) {
   this.telefone = telefone;
   this.cpf = cpf;
   this.rg = rg;
+  this.matricula = matricula;
 
   //Abre conexão com o banco
   const dbName = "iLarica";
@@ -21,7 +22,7 @@ function Usuario(nome, senha, email, telefone, cpf, rg) {
     db.transaction(function (tx) {
       tx.executeSql(
         'INSERT INTO Usuarios (nome, senha, email, telefone, cpf, rg, matricula, cargo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-        [self.nome, self.senha, self.email, self.telefone, self.cpf, self.rg, 0, 0],
+        [self.nome, self.senha, self.email, self.telefone, self.cpf, self.rg, self.matricula, 0],
         function (tx, result) {
           console.log('Inserção realizada com sucesso em usuários! ID do registro: ' + result.insertId);
         },

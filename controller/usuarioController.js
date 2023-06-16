@@ -10,11 +10,12 @@ $(document).ready(function () {
     let telefone = $('#Telefone').val();
     let cpf = $('#Cpf').val();
     let rg = $('#Rg').val();
+    let matricula = $('#Matricula').val();
 
     let dadosValidados = validaDados(nome, senha, email, telefone, cpf, rg);
 
     if (dadosValidados == true) {
-    let novoUsuario = new Usuario(nome, senha, email, telefone, cpf, rg);
+    let novoUsuario = new Usuario(nome, senha, email, telefone, cpf, rg, matricula);
     console.log(novoUsuario);
     novoUsuario.salvar();
       window.location.href = "../../index.html";

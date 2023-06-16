@@ -6,7 +6,8 @@ $(document).ready(function () {
 
     $('#BtnAvaliar').click(function () {
         var valorRating = $("input[name='rating']:checked").val();
-        avaliacaoModel.avaliar(valorRating);
+        var valorGorjeta = $('#gorjeta').val(); // Obtém o valor do input de gorjeta
+        avaliacaoModel.avaliar(valorRating,valorGorjeta);
         
     });
 });
