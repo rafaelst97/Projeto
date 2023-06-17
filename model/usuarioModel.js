@@ -35,6 +35,8 @@ function Usuario(nome, senha, email, telefone, cpf, rg, matricula) {
 
   //Faz Login
   this.login = function (email, senha) {
+
+    let matricula = 0;
     db.transaction(function (tx) {
       tx.executeSql(
         'SELECT * FROM Usuarios WHERE email = ? AND senha = ?',
@@ -43,19 +45,31 @@ function Usuario(nome, senha, email, telefone, cpf, rg, matricula) {
           if (result.rows.length > 0) {
             console.log('Login realizado com sucesso!');
             db.transaction(function (tx) {
-              tx.executeSql('SELECT rowid FROM Usuarios WHERE email = ?', [email], function (tx, result) {
+              tx.executeSql('SELECT rowid, matricula FROM Usuarios WHERE email = ?', [email], function (tx, result) {
+
+                matricula = result.rows.item(0).matricula;
                 setCookie('idUsuario', result.rows.item(0).rowid, 1);
+
+                if (matricula > 0) {
+                  console.log('Você é um funcionário!');
+                  setCookie('isFuncionario', 1, 1);
+                }else{
+                  setCookie('isFuncionario', 0, 1);
+                }
               });
             });
 
             db.transaction(function (tx) {
               tx.executeSql('SELECT COUNT(*) FROM Pedidos WHERE idUsuario = ? AND status <> 5 AND status <> 7',
                [getCookie('idUsuario')], function (tx, result) {
-                if (result.rows.item(0)['COUNT(*)'] > 0) {
+                let isFuncionario = getCookie('isFuncionario');
+                if (result.rows.item(0)['COUNT(*)'] > 0 && isFuncionario == 0) {
                   console.log('Você possui um pedido em andamento!');
                   window.location.href = '../../view/pedido/rastreio.html';
-                }else{
+                }else if (isFuncionario == 0) {
                   window.location.href = '../../view/pedido/pedido.html';
+                }else{
+                  window.location.href = '../../view/area-funcionario/area-funcionario.html';
                 }
                }, function (tx, error) {
                   console.log('Erro na consulta: ' + error.message);
