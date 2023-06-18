@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iLarica - Admin</title>
+    <title>iLarica - Relatório</title>
     <link rel="stylesheet" type="text/css" href="../style/style.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
@@ -24,34 +24,39 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div class="container-fluid">
                 <div class="container">
-                    <h1 class="d-flex justify-content-center"><strong>Menu administrativo</strong></h1>
+                    <h1 class="d-flex justify-content-center"><strong>Relatório Gorjetas e Avaliações</strong></h1>
                 </div>
             </div>
         </nav>
     </header>
 
     <main>
-        <div class="container d-flex flex-column justify-content-center align-items-center" id="BtnsAdmin"
+        <div class="container d-flex flex-column justify-content-center align-items-center" id="RelatorioGorjetas"
             style="height: 100vh;">
-            <!--Botão do Relatório de Vendas-->
-            <button type="button" class="btn btn-primary btn-lg" id="BtnRelatorioVendas">Relatório de Vendas</button>
-            <!--Botão do Relatório de Gorjetas-->
-            <button type="button" class="btn btn-primary btn-lg mt-3" id="BtnRelatorioGorjetas">Relatório de
-                Gorjetas</button>
+            <table class="table table-striped table-hover" id="TableAvaliacoes">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Nota</th>
+                        <th scope="col">Valor</th>
+                    </tr>
+                </thead>
+                <tbody id="TableAvaliacoesBody">
+                </tbody>
+            </table>
         </div>
 
     </main>
 
-    <footer>
-        <div class="container">
-            <nav class="navbar fixed-bottom navbar-light bg-light d-flex justify-content-around">
-                <a type="button" class="btn btn-primary btn-lg" href="../../index.html">
-                    <</a> <button type="button" class="btn btn-primary btn-lg" id="BtnConfirmaEntrega">Prosseguir
-                        </button>
-            </nav>
-        </div>
-    </footer>
-
-</body>
-
+        <footer>
+            <div class="container">
+                <nav class="navbar fixed-bottom navbar-light bg-light d-flex justify-content-around">
+                    <a type="button" class="btn btn-primary btn-lg" href="area-funcionario.html">
+                    <
+                    </a> 
+                </nav> 
+            </div> 
+        </footer> 
+    </body> 
 </html>
