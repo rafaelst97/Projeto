@@ -7,7 +7,23 @@ $(document).ready(function () {
     const db = openDatabase(dbName, dbVersion, dbDisplayName, dbSize);
 
     db.transaction(function (tx) {
-        tx.executeSql('SELECT Pedidos.rowid AS idPedido, Usuarios.nome AS usuarioNome, (SELECT SUM(ItensCardapio.preco * ItensPedido.quantidade) FROM ItensPedido LEFT JOIN ItensCardapio ON ItensCardapio.rowid = ItensPedido.idItem WHERE ItensPedido.idPedido = Pedidos.rowid) AS valorTotal FROM Pedidos LEFT JOIN Usuarios ON Usuarios.rowid = Pedidos.idUsuario', [], function (tx, results) {
+        tx.executeSql(`SELECT 
+                            Pedidos.rowid AS idPedido, 
+                            Usuarios.nome AS usuarioNome, 
+                            (
+                            SELECT 
+                                SUM(
+                                ItensCardapio.preco * ItensPedido.quantidade
+                                ) 
+                            FROM 
+                                ItensPedido 
+                                LEFT JOIN ItensCardapio ON ItensCardapio.rowid = ItensPedido.idItem 
+                            WHERE 
+                                ItensPedido.idPedido = Pedidos.rowid
+                            ) AS valorTotal 
+                        FROM 
+                            Pedidos 
+                            LEFT JOIN Usuarios ON Usuarios.rowid = Pedidos.idUsuario`, [], function (tx, results) {
             var len = results.rows.length, i;
             console.log(results);
             for (i = 0; i < len; i++) {
