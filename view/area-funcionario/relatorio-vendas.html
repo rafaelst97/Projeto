@@ -38,24 +38,33 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Cliente</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Valor</th>
                     </tr>
                 </thead>
                 <tbody id="TablePedidosBody">
                 </tbody>
             </table>
+
+            <!--Alterar Status do Pedido-->
+            <h3>Alterar Status de Pedido(admin)</h3>
+            <select class="form-select" aria-label="Default select example" id="selectStatus">
+                <option selected>Escolha um status</option>
+              </select>
+            <div class="input-group col-12 mt-3">
+                <span class="input-group-text" id="addon-wrapping">Id Pedido</span>
+                <input type="number" class="form-control input-padrao" id="inputIdPedido" placeholder="idPedido" aria-label="idPedido"
+                    aria-describedby="addon-wrapping">
+            </div>
+
+            <button type="button" class="btn btn-primary mt-3" id="btnAlterarStatus">Alterar Status</button>
+
         </div>
 
     </main>
 
-        <footer>
-            <div class="container">
-                <nav class="navbar fixed-bottom navbar-light bg-light d-flex justify-content-around">
-                    <a type="button" class="btn btn-primary btn-lg" href="area-funcionario.html">
-                    <
-                    </a> 
-                </nav> 
-            </div> 
-        </footer> 
-    </body> 
-</html>
+    <footer>
+        <div class="container">
+            <nav class="navbar fixed-bottom navbar-light bg-light d-flex justify-content-around">
+                <a type="button" class="btn btn-primary btn-lg" href="area-funcionario.html">
+                    < </a> </nav> </div> </footer> </body> </html>

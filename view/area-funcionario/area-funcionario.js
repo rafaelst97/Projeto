@@ -8,27 +8,29 @@ $(document).ready(function () {
 
     db.transaction(function (tx) {
         tx.executeSql(`SELECT 
-                            Pedidos.rowid AS idPedido, 
-                            Usuarios.nome AS usuarioNome, 
-                            (
-                            SELECT 
-                                SUM(
-                                ItensCardapio.preco * ItensPedido.quantidade
-                                ) 
-                            FROM 
-                                ItensPedido 
-                                LEFT JOIN ItensCardapio ON ItensCardapio.rowid = ItensPedido.idItem 
-                            WHERE 
-                                ItensPedido.idPedido = Pedidos.rowid
-                            ) AS valorTotal 
+                        Pedidos.rowid AS idPedido, 
+                        Usuarios.nome AS usuarioNome, 
+                        Status.nome AS nomeStatus, 
+                        (
+                        SELECT 
+                            SUM(
+                            ItensCardapio.preco * ItensPedido.quantidade
+                            ) 
                         FROM 
-                            Pedidos 
-                            LEFT JOIN Usuarios ON Usuarios.rowid = Pedidos.idUsuario`, [], function (tx, results) {
+                            ItensPedido 
+                            LEFT JOIN ItensCardapio ON ItensCardapio.rowid = ItensPedido.idItem 
+                        WHERE 
+                            ItensPedido.idPedido = Pedidos.rowid
+                        ) AS valorTotal 
+                    FROM 
+                        Pedidos 
+                        LEFT JOIN Usuarios ON Usuarios.rowid = Pedidos.idUsuario 
+                        LEFT JOIN Status ON Status.rowid = Pedidos.status`, [], function (tx, results) {
             var len = results.rows.length, i;
             console.log(results);
             for (i = 0; i < len; i++) {
                 var item = results.rows.item(i);
-                $("#TablePedidosBody").append("<tr><td>" + item.idPedido + "</td><td>" + item.usuarioNome + "</td><td>R$" + item.valorTotal.toString().replace('.', ',') + "</td></tr>");
+                $("#TablePedidosBody").append("<tr><td>" + item.idPedido + "</td><td>" + item.usuarioNome + "</td><td>" + item.nomeStatus + "</td><td>R$" + item.valorTotal.toString().replace('.', ',') + "</td></tr>");
             }
         }, null);
     });
@@ -51,12 +53,36 @@ $(document).ready(function () {
         }, null);
     });
 
+    db.transaction(function (tx) {
+        tx.executeSql(`SELECT rowid, nome FROM Status`, [], function (tx, results) {
+            var len = results.rows.length, i;
+            console.log(results);
+            for (i = 0; i < len; i++) {
+                var item = results.rows.item(i);
+                $("#selectStatus").append("<option value='" + item.rowid + "'>" + item.nome + "</option>");
+            }
+        }, null);
+    });
+
     $("#BtnRelatorioVendas").click(function () {
         window.location.href = "relatorio-vendas.html";
     });
 
     $("#BtnRelatorioGorjetas").click(function () {
         window.location.href = "relatorio-gorjeta.html";
+    });
+
+    $("#btnAlterarStatus").click(function () {
+        var idPedido = $("#inputIdPedido").val();
+        var idStatus = $("#selectStatus").val();
+
+        db.transaction(function (tx) {
+            tx.executeSql(`UPDATE Pedidos SET status = ? WHERE rowid = ?`, [idStatus, idPedido], function (tx, results) {
+                alert("Status alterado com sucesso!");
+            }, null);
+        });
+
+        location.reload();
     });
 
 });
