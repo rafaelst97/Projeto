@@ -1,5 +1,5 @@
 .input-padrao{
-    max-width: 70%;
+    max-width: 100%;
 }
 
 .centraliza-vertical{
@@ -9,4 +9,13 @@
 .hr {
     border-bottom: 1px solid black; /* define a espessura, estilo e cor da borda */
     margin: 10px 0; /* adiciona margem para espaçamento */
+}
+
+.navbar{
+    background-color: #DA291C !important;
+}
+
+.btn-primary{
+    background-color: #F2A900 !important;
+    border-color: #F2A900 !important;
 }
