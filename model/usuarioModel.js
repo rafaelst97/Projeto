@@ -9,6 +9,10 @@ function Usuario(nome, senha, email, telefone, cpf, rg, matricula) {
   this.rg = rg;
   this.matricula = matricula;
 
+  if (typeof this.matricula === 'undefined' || this.matricula == null || this.matricula == '') {
+    this.matricula = 0;
+  }
+
   //Abre conexão com o banco
   const dbName = "iLarica";
   const dbVersion = "1.0";
