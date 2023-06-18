@@ -33,12 +33,30 @@ $(document).ready(function () {
         }, null);
     });
 
+    db.transaction(function (tx) {
+        tx.executeSql(`SELECT 
+                            Avaliacoes.rowid AS idGorjeta, 
+                            Usuarios.nome AS userName, 
+                            Avaliacoes.nota AS nota, 
+                            Avaliacoes.gorjeta AS valorGorjeta 
+                        FROM 
+                            Avaliacoes 
+                            LEFT JOIN Usuarios ON Usuarios.rowid = Avaliacoes.idUsuario`, [], function (tx, results) {
+            var len = results.rows.length, i;
+            console.log(results);
+            for (i = 0; i < len; i++) {
+                var item = results.rows.item(i);
+                $("#TableAvaliacoesBody").append("<tr><td>" + item.idGorjeta + "</td><td>" + item.userName + "</td><td>" + item.nota + "</td><td>R$" + item.valorGorjeta.toString().replace('.', ',') + "</td></tr>");
+            }
+        }, null);
+    });
+
     $("#BtnRelatorioVendas").click(function () {
         window.location.href = "relatorio-vendas.html";
     });
 
     $("#BtnRelatorioGorjetas").click(function () {
-        window.location.href = "relatorio-gorjetas.html";
+        window.location.href = "relatorio-gorjeta.html";
     });
 
 });
